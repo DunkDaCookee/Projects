@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tic-Tac-Toe</title>
+  <meta name="description" content="Simple Website to practice HTML, JS and CSS">
+  <meta name="author" content="BillyJamesMartin">
+  <script src="js.js"></script>
+  <link rel="stylesheet" href="cs.css">
+</head>
+
+<body>
+  <h1>Tic-Tac-Toe</h1>
+  <h2 id="Winner">___________</h2>
+  <h3 id="player">Current Player: Player 1</h3>
+  <table id="TTT">
+    <tr>
+      <td class="tttCell"id="0" onclick="swap(this)"></td><td class="tttCell"id="1" onclick="swap(this)"></td><td class="tttCell"id="2" onclick="swap(this)"></td>
+    </tr>
+    <tr>
+      <td class="tttCell"id="3"onclick="swap(this)"></td><td class="tttCell"id="4"onclick="swap(this)"></td><td class="tttCell"id="5" onclick="swap(this)"></td>
+    </tr>
+    <tr>
+      <td class="tttCell"id="6"onclick="swap(this)"></td><td class="tttCell"id="7"onclick="swap(this)"></td><td class="tttCell"id="8"onclick="swap(this)"></td>
+    </tr>
+  </table>
+  <h4 onclick="reset()">RESET</h4>
+</body>
+</html>
