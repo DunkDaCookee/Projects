@@ -1,6 +1,4 @@
-Change how course objects store what students take them to a hashmap so multiple students' scores can be 
-   tracked in the same course object without having to make additional objects.
-Develop main.java so the application can run without the user needing knowledge of what methods the objects have.
+Develop main.java so the application can run without the user needing knowledge of what methods the objects have.(DEMO has been created within main).
 
 Future plans
 Create GUI to make app more user friendly.
