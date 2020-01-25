@@ -4,18 +4,19 @@
  * @author (Billy James Martin)
  * @version (1)
  */
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 public class Register {
 	
-	private List<Student> STUDENTS;
+	private ArrayList<Student> STUDENTS;
 	/**
 	 * Constructor
 	 */
 	public Register() {
-		
+		STUDENTS = new ArrayList<Student>();
 	}
 	/**
 	 * Adds a student to the register.
@@ -31,6 +32,7 @@ public class Register {
 	public void removeStudent(Student student) {
 		if(STUDENTS.contains(student)) {
 			STUDENTS.remove(student);
+			System.out.println(student.getFirstName()+" "+student.getSurname()+" Has been removed from this register");
 			sortBySurname();											//Sort the register
 			
 		}
@@ -53,6 +55,7 @@ public class Register {
 	 * Prints all students on register.
 	 */
 	public void listStudents() {
+		System.out.println("Current Students On This Register: (Surname, Forename");
 		for(Student s: STUDENTS) {System.out.println(s.getSurname()+", "+s.getFirstName());}
 	}
 }

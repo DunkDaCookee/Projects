@@ -1,19 +1,19 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
 /**
  * A Course object containing several modules.
  *
  * @author (Billy James Martin)
- * @version (1)
+ * @version (2)
  */
 public class Course {
 	
 	private String TITLE;
 	private int NOMODULES;
-	private int FINALMARK=-1;
-	private String FINALGRADE;
 	private Register REGISTER;
-	
+	private HashMap<Student, Integer> SCORES;
+	private HashMap<Student, String> GRADES;
 	private ArrayList<Module> MODULES;
 	
 	/**
@@ -27,6 +27,8 @@ public class Course {
 		NOMODULES=nomodules;
 		MODULES = new ArrayList<Module>();
 		REGISTER = register;
+		SCORES = new HashMap<Student, Integer>();
+		GRADES = new HashMap<Student, String>();
 		assignModules();
 	}
 	/**
@@ -74,46 +76,62 @@ public class Course {
 		
 	}
 	/**
-	 * Prints a list of all modules.
+	 * Prints a list of all modules that are a part of this course.
 	 */
 	public void printModules() {for(Module m: MODULES) {System.out.println(m.getName());}}
 	/**
-	 * Set the grade of this module passed on the final mark.
+	 * Set the grade of this course based on the mark provided.
+	 * @param mark The mark that is being graded.
+	 * @return The assigned grade.
 	 */
-	public void setGrade() {
-		if(FINALMARK<0) {FINALGRADE="Ungraded";}
-		else if(FINALMARK >= 40 && FINALMARK < 49) {FINALGRADE="Pass";}
-		else if(FINALMARK >= 50 && FINALMARK < 69) {FINALGRADE="Merit";}
-		else if(FINALMARK >= 70 && FINALMARK <= 100) {FINALGRADE="Distinction";}
-		else {FINALGRADE = "fail";}
+	public String grade(int mark) {
+		String grade="Ungraded";
+		if(mark >= 40 && mark < 49) {grade="Pass";}
+		else if(mark >= 50 && mark < 69) {grade="Merit";}
+		else if(mark >= 70 && mark <= 100) {grade="Distinction";}
+		else {grade = "Fail";}
+		return grade;
 	}
 	/**
-	 * Assigns a final mark to this module.
+	 * Assigns a final mark to this course.
+	 * @param student The given student the mark is being assigned to.
 	 */
-	public void mark() {
-		int CurrentMark=0;
+	public void mark(Student student) {
+		int mark=0;
 		for(Module m : MODULES) {
-			CurrentMark += m.getMark()*(m.getWeighting()/10);
+			mark += m.getMark(student)*(m.getWeighting()/10);
 		}
-		FINALMARK=CurrentMark;
-		setGrade();
+		SCORES.put(student, mark);
+		GRADES.put(student, grade(mark));
 	}
 	/**
-	 * Retrieve the final mark given to a student on this course.
+	 * Retrieve the final mark given to a given student on this course.
+	 * @param Student The given student.
 	 * @return The final mark.
 	 */
-	public int getFinalMark() {return FINALMARK;}
+	public int getFinalMark(Student student) {
+		return SCORES.get(student);}
 	/**
-	  * Retrieve the final grade given to a student on this course.
-	 * @return The final grade.
+	 * Retrieve the final grade given to a student on this course.
+	 * @param Student The given student.
+	 * @return The final grade of the given student.
 	 */
-	public String getFinalGrade() {return FINALGRADE;}
+	public String getFinalGrade(Student student) {return GRADES.get(student);}
 	
 	/**
 	 * Add student to the course's register.
 	 * @param student The student to be added.
 	 */
-	public void addToRegister(Student student) {
-		REGISTER.addStudent(student);
+	public void addToRegister(Student student) {REGISTER.addStudent(student);}
+	/**
+	 * Remove student to the course's register.
+	 * @param student The student to be removed.
+	 */
+	public void removeFromRegister(Student student) {REGISTER.removeStudent(student);}
+	/**
+	 * List all students on this course's register.
+	 */
+	public void listStudents() {
+		REGISTER.listStudents();
 	}
 }
